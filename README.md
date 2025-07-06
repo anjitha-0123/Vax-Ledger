@@ -21,6 +21,7 @@ cd ..
 ```
 ## To deploy the ChainCode
 ```
+./network.sh deployCC -ccn Vax-Ledger -ccp ../../Vax-Ledger/Chaincode/ -ccl go -c coldchannel 
 ```
 
 ## To Down the Network
