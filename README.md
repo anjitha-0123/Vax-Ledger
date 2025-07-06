@@ -21,10 +21,11 @@ cd ..
 ```
 ## To deploy the ChainCode
 ```
-./network.sh deployCC -ccn Vax-Ledger -ccp ../../Vax-Ledger/Chaincode/ -ccl go -c coldchannel 
+./network.sh deployCC -ccn Vax-Ledger -ccp ../../Vax-Ledger/Chaincode/ -ccl go -c coldchannel -cccg ../../Vax-Ledger/Chaincode/collections.json
 ```
 ```
-./network.sh deployCC -ccn Vax-Ledger -ccp ../../Vax-Ledger/Chaincode/ -ccl go -c coldchannel -ccv 3.0 -ccs 3
+./network.sh deployCC -ccn Vax-Ledger -ccp ../../Vax-Ledger/Chaincode/ -ccl go -c coldchannel -ccv 3.0 -ccs 3 -cccg ../../Vax-Ledger/Chaincode/collections.json
+
 ```
 
 ## To Down the Network
