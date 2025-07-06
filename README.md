@@ -42,22 +42,33 @@ cd ..
 ```
 ### Pvt Data
 ```
-export MANUFACTURER=$(echo -n "Pfizer" | base64 | tr -d '\n')
-export VACCINE_TYPE=$(echo -n "COVID-19" | base64 | tr -d '\n')
-export MFG_DATE=$(echo -n "2025-07-01" | base64 | tr -d '\n')
-export EXP_DATE=$(echo -n "2026-07-01" | base64 | tr -d '\n')
-export QUANTITY=$(echo -n "1000" | base64 | tr -d '\n')
-export MIN_TEMP=$(echo -n "2.0" | base64 | tr -d '\n')
-export MAX_TEMP=$(echo -n "8.0" | base64 | tr -d '\n')
+cat <<EOF > vaccine.json
+{
+  "batchID": "Batch-02",
+  "manufacturer": "$(echo $MANUFACTURER | base64 --decode)",
+  "vaccineType": "$(echo $VACCINE_TYPE | base64 --decode)",
+  "manufactureDate": "$(echo $MFG_DATE | base64 --decode)",
+  "expiryDate": "$(echo $EXP_DATE | base64 --decode)",
+  "quantity": $(echo $QUANTITY | base64 --decode),
+  "minTemp": $(echo $MIN_TEMP | base64 --decode),
+  "maxTemp": $(echo $MAX_TEMP | base64 --decode)
+}
+EOF
+
 ```
 ```
-peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile $ORDERER_CA -C coldchannel -n Vax-Ledger --peerAddresses localhost:7051 --tlsRootCertFiles $ORG1_PEER_TLSROOTCERT --peerAddresses localhost:9051 --tlsRootCertFiles $ORG2_PEER_TLSROOTCERT -c '{"Args":["VaxContract:CreateBatch","Batch-01"]}' --transient "{\"manufacturer\":\"$MANUFACTURER\",\"vaccineType\":\"$VACCINE_TYPE\",\"manufactureDate\":\"$MFG_DATE\",\"expiryDate\":\"$EXP_DATE\",\"quantity\":\"$QUANTITY\",\"minTemp\":\"$MIN_TEMP\",\"maxTemp\":\"$MAX_TEMP\"}"
+export VACCINE_JSON=$(cat vaccine.json | base64 | tr -d '\n')
+
+```
+```
+peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile $ORDERER_CA -C coldchannel -n Vax-Ledger --peerAddresses localhost:7051 --tlsRootCertFiles $ORG1_PEER_TLSROOTCERT --peerAddresses localhost:9051 --tlsRootCertFiles $ORG2_PEER_TLSROOTCERT -c '{"Args":["VaxContract:CreateBatch"]}' --transient "{\"vaccine\":\"$VACCINE_JSON\"}"
+
 ```
 
 
 ### Query
 ```
-peer chaincode query -C coldchannel -n Vax-Ledger -c '{"function":"ReadBatch","Args":["batch-02"]}'
+peer chaincode query -C coldchannel -n Vax-Ledger -c '{"Function":"ReadBatch","Args":["Batch-03"]}'
 ```
 ```
 peer chaincode query -C coldchannel -n Vax-Ledger -c '{"function":"GetAllBatch","Args":[]}'
