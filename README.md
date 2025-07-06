@@ -32,11 +32,28 @@ cd ..
 ```
 ./network.sh down
 ```
-### Invoke
-```
-`peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem" -C coldchannel -n Vax-Ledger --peerAddresses localhost:7051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt" --peerAddresses localhost:9051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt" -c '{"function":"CreateBatch","Args":["batch-02","Apolo","Covid","23-01-2025","23-01-2027","150","2.4","5.5"]}'`
 
+### Invoke
+###  general variables
 ```
+```
+### org1 env variables
+```
+```
+### Pvt Data
+```
+export MANUFACTURER=$(echo -n "Pfizer" | base64 | tr -d '\n')
+export VACCINE_TYPE=$(echo -n "COVID-19" | base64 | tr -d '\n')
+export MFG_DATE=$(echo -n "2025-07-01" | base64 | tr -d '\n')
+export EXP_DATE=$(echo -n "2026-07-01" | base64 | tr -d '\n')
+export QUANTITY=$(echo -n "1000" | base64 | tr -d '\n')
+export MIN_TEMP=$(echo -n "2.0" | base64 | tr -d '\n')
+export MAX_TEMP=$(echo -n "8.0" | base64 | tr -d '\n')
+```
+```
+peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile $ORDERER_CA -C coldchannel -n Vax-Ledger --peerAddresses localhost:7051 --tlsRootCertFiles $ORG1_PEER_TLSROOTCERT --peerAddresses localhost:9051 --tlsRootCertFiles $ORG2_PEER_TLSROOTCERT -c '{"Args":["VaxContract:CreateBatch","Batch-01"]}' --transient "{\"manufacturer\":\"$MANUFACTURER\",\"vaccineType\":\"$VACCINE_TYPE\",\"manufactureDate\":\"$MFG_DATE\",\"expiryDate\":\"$EXP_DATE\",\"quantity\":\"$QUANTITY\",\"minTemp\":\"$MIN_TEMP\",\"maxTemp\":\"$MAX_TEMP\"}"
+```
+
 
 ### Query
 ```
@@ -45,3 +62,5 @@ peer chaincode query -C coldchannel -n Vax-Ledger -c '{"function":"ReadBatch","A
 ```
 peer chaincode query -C coldchannel -n Vax-Ledger -c '{"function":"GetAllBatch","Args":[]}'
 ```
+
+
