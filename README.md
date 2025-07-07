@@ -24,7 +24,7 @@ cd ..
 ./network.sh deployCC -ccn Vax-Ledger -ccp ../../Vax-Ledger/Chaincode/ -ccl go -c coldchannel -cccg ../../Vax-Ledger/Chaincode/collections.json
 ```
 ```
-./network.sh deployCC -ccn Vax-Ledger -ccp ../../Vax-Ledger/Chaincode/ -ccl go -c coldchannel -ccv 3.0 -ccs 3 -cccg ../../Vax-Ledger/Chaincode/collections.json
+./network.sh deployCC -ccn Vax-Ledger -ccp ../../Vax-Ledger/Chaincode/ -ccl go -c coldchannel -ccv 2.0 -ccs 2 -cccg ../../Vax-Ledger/Chaincode/collections.json
 
 ```
 
