@@ -111,23 +111,7 @@ export CORE_PEER_ADDRESS=localhost:9051
 
 
 ```
-### templog invoke Org2
-```
-peer chaincode invoke \
-  -o localhost:7050 \
-  --ordererTLSHostnameOverride orderer.example.com \
-  --tls \
-  --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem" \
-  -C coldchannel \
-  -n Vax-Ledger \
-  --peerAddresses localhost:7051 \
-  --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt" \
-  --peerAddresses localhost:9051 \
-  --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt" \
-  -c '{"Args":["TempContract:AddTemperatureLog", "Batch-01", "5.3", "07-07-2025T15:35:00Z"]}'
 
-
-```
 ### Query Temp History
 ```
 peer chaincode query   -C coldchannel   -n Vax-Ledger   -c '{"Args":["TempContract:GetTemperatureLogHistory", "Batch-01"]}'
@@ -137,7 +121,8 @@ peer chaincode query   -C coldchannel   -n Vax-Ledger   -c '{"Args":["TempContra
 
 ```
 ### org3 env var
-```export CORE_PEER_LOCALMSPID=Org3MSP
+```
+export CORE_PEER_LOCALMSPID=Org3MSP
 
 export CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/organizations/peerOrganizations/org3.example.com/peers/peer0.org3.example.com/tls/ca.crt
 
@@ -145,17 +130,12 @@ export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/org3.examp
 
 export CORE_PEER_ADDRESS=localhost:11051
 ```
-### invoke for verify temp
+### invoke for templog org3
 ```
-peer chaincode invoke \
-  -o localhost:7050 \
-  --ordererTLSHostnameOverride orderer.example.com \
-  --tls --cafile "$ORDERER_CA" \
-  -C coldchannel \
-  -n Vax-Ledger \
-  --peerAddresses localhost:11051 \
-  --tlsRootCertFiles "$CORE_PEER_TLS_ROOTCERT_FILE" \
-  -c '{"function": "VerifyTemp", "Args": ["Batch-03", "2.0", "8.0"]}'
+peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile $ORDERER_CA -C coldchannel -n Vax-Ledger --peerAddresses localhost:7051 --tlsRootCertFiles $ORG1_PEER_TLSROOTCERT --peerAddresses localhost:9051 --tlsRootCertFiles $ORG2_PEER_TLSROOTCERT -c '{"function":"AddTemperatureLog","Args":["Batch-01", "5.3", "07-07-2025T15:35:00Z"]}'
+
 ```
+
+### Query Temp History org3
 
 
