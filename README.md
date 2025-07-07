@@ -128,12 +128,9 @@ peer chaincode invoke \
 
 
 ```
-### Query Temp
+### Query Temp History
 ```
-peer chaincode query \
-  -C coldchannel \
-  -n Vax-Ledger \
-  -c '{"Args":["TempContract:GetTemperatureLogs", "Batch-01"]}'
+peer chaincode query   -C coldchannel   -n Vax-Ledger   -c '{"Args":["TempContract:GetTemperatureLogHistory", "Batch-01"]}'
 ```
 ### query of read temp for org2 and org3
 ```
