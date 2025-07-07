@@ -98,20 +98,6 @@ peer chaincode invoke \
   --tlsRootCertFiles $ORG1_PEER_TLSROOTCERT \
   -c '{"Args":["VaxContract:DeleteBatch","Batch-01"]}'
 ```
-### Deliverbatch invoke Org1
-```
-peer chaincode invoke \
-  -o localhost:7050 \
-  --ordererTLSHostnameOverride orderer.example.com \
-  --tls \
-  --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem" \
-  -C coldchannel \
-  -n Vax-Ledger \
-  --peerAddresses localhost:7051 \
-  --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt" \
-  -c '{"function":"DeliverBatch","Args":["Batch-02"]}'
-
-```
 
 ### Env veriables of Org2
 ```
