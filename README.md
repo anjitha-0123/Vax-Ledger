@@ -78,16 +78,25 @@ peer chaincode invoke \
   --transient "{\"manufacturer\":\"$MANUFACTURER\",\"vaccineType\":\"$VACCINE_TYPE\"}"
 
 ```
-
-
-
-
 ### Query
 ```
 peer chaincode query -C coldchannel -n Vax-Ledger -c '{"Args":["VaxContract:ReadBatch","Batch-02"]}'
 ```
 ```
 peer chaincode query -C coldchannel -n Vax-Ledger -c '{"function":"GetAllBatch","Args":[]}'
+```
+### Delete Invoke
+```
+peer chaincode invoke \
+  -o localhost:7050 \
+  --ordererTLSHostnameOverride orderer.example.com \
+  --tls \
+  --cafile $ORDERER_CA \
+  -C coldchannel \
+  -n Vax-Ledger \
+  --peerAddresses localhost:7051 \
+  --tlsRootCertFiles $ORG1_PEER_TLSROOTCERT \
+  -c '{"Args":["VaxContract:DeleteBatch","Batch-01"]}'
 ```
 ### Deliverbatch invoke Org1
 ```
