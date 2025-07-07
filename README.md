@@ -113,15 +113,30 @@ export CORE_PEER_ADDRESS=localhost:9051
 ```
 ### templog invoke Org2
 ```
-peer chaincode invoke   -o localhost:7050   --ordererTLSHostnameOverride orderer.example.com   --tls   --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem"   -C coldchannel   -n Vax-Ledger   --peerAddresses localhost:9051   --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt"   -c '{"function":"AddTemperatureLog","Args":["Batch-01", "4.5"]}'
+peer chaincode invoke \
+  -o localhost:7050 \
+  --ordererTLSHostnameOverride orderer.example.com \
+  --tls \
+  --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem" \
+  -C coldchannel \
+  -n Vax-Ledger \
+  --peerAddresses localhost:7051 \
+  --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt" \
+  --peerAddresses localhost:9051 \
+  --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt" \
+  -c '{"Args":["TempContract:AddTemperatureLog", "Batch-01", "5.3", "07-07-2025T15:35:00Z"]}'
+
 
 ```
-### query of read temp for org2 and org3
+### Query Temp
 ```
 peer chaincode query \
   -C coldchannel \
   -n Vax-Ledger \
-  -c '{"function":"ReadTemperatureLog","Args":["Batch-02"]}'
+  -c '{"Args":["TempContract:GetTemperatureLogs", "Batch-01"]}'
+```
+### query of read temp for org2 and org3
+```
 
 ```
 ### org3 env var
