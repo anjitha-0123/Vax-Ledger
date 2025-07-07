@@ -57,7 +57,18 @@ export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/org1.examp
 export CORE_PEER_ADDRESS=localhost:7051
 ```
 ### Pvt Data
+### Setting the transient data
 ```
+export MANUFACTURER=$(echo -n "Pfizer" | base64)
+export VACCINE_TYPE=$(echo -n "mRNA" | base64)
+export MFG_DATE=$(echo -n "2025-07-01" | base64)
+export EXP_DATE=$(echo -n "2026-07-01" | base64)
+export QUANTITY=$(echo -n "1000" | base64)
+export MIN_TEMP=$(echo -n "-70" | base64)
+export MAX_TEMP=$(echo -n "-60" | base64)
+```
+```
+
 cat <<EOF > vaccine.json
 {
   "batchID": "Batch-02",
