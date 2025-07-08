@@ -152,6 +152,4 @@ peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.exa
 
 ```
 
-### Query Temp History org3
-
 
