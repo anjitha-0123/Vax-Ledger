@@ -118,7 +118,6 @@ peer chaincode query   -C coldchannel   -n Vax-Ledger   -c '{"Args":["TempContra
 ```
 ### Verify Temp
 ```
-# ensure these are set correctly:
 export ORDERER_CA=${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
 export ORG2_PEER_TLSROOTCERT=${PWD}/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt
 
