@@ -116,8 +116,23 @@ export CORE_PEER_ADDRESS=localhost:9051
 ```
 peer chaincode query   -C coldchannel   -n Vax-Ledger   -c '{"Args":["TempContract:GetTemperatureLogHistory", "Batch-01"]}'
 ```
-### query of read temp for org2 and org3
+### Verify Temp
 ```
+# ensure these are set correctly:
+export ORDERER_CA=${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
+export ORG2_PEER_TLSROOTCERT=${PWD}/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt
+
+peer chaincode invoke \
+  -o localhost:7050 \
+  --ordererTLSHostnameOverride orderer.example.com \
+  --tls \
+  --cafile $ORDERER_CA \
+  -C coldchannel \
+  -n Vax-Ledger \
+  --peerAddresses localhost:9051 \
+  --tlsRootCertFiles $ORG2_PEER_TLSROOTCERT \
+  -c '{"Args":["TempContract:VerifyTemperatureLogs","Batch-01"]}'
+
 
 ```
 ### org3 env var
