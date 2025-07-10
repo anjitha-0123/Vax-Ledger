@@ -1,6 +1,11 @@
 # 🧊 Vax Ledger - Vaccine Cold Chain Management System
 A Cold Chain Ledger to ensure the environmental integrity of vaccines using Hyper Ledger Fabric Blockchain platform
 
+## Problem Statement
+Ensuring the efficacy and safety of vaccines during storage and transportation is a critical challenge in the global healthcare supply chain.Vaccines are highly sensitive to temperature fluctuations.
+traditional cold chain systems suffer from: Lack of transparency and traceability in shipping records.
+
+
 ## 🚀 Features
 ✅ Register vaccine batches (by Manufacturer-Org1)
 
