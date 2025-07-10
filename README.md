@@ -6,7 +6,7 @@ A Cold Chain Ledger to ensure the environmental integrity of vaccines using Hype
 
 📦 Track temperature-sensitive data (manual or IoT-based-Org3)
 
-🔍 Query and verify vaccine batch details (by Retailer-Org2)
+🔍 Query and verify vaccine batch details mainly the temperature (by Retailer-Org2)
 
 🔐 Immutable and tamper-proof ledger using Hyperledger Fabric
 
