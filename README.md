@@ -1,6 +1,16 @@
-# Vax-Ledger
+# 🧊 Vax Ledger - Vaccine Cold Chain Management System
 A Cold Chain Ledger to ensure the environmental integrity of vaccines using Hyper Ledger Fabric Blockchain platform
 
+## 🚀 Features
+✅ Register vaccine batches (by Manufacturer-Org1)
+
+📦 Track temperature-sensitive data (manual or IoT-based-Org3)
+
+🔍 Query and verify vaccine batch details (by Retailer-Org2)
+
+🔐 Immutable and tamper-proof ledger using Hyperledger Fabric
+
+🌐 RESTful APIs using Gin (Go framework)
 
 ## To Build the Network
 ```
